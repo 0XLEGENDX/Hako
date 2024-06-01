@@ -58,7 +58,7 @@ def getUsers():
     age = request.form['age'].split()
     location = request.form['location'].split()
 
-    query = "SELECT * FROM users WHERE interests IN (" + ",".join("'" + item + "'" for item in interests) + ") AND age >= " + str(age[0]) + " AND age <= " + str(age[1]) + " AND location IN ( " + "".join("'" + item + "'" for item in location) + ")"
+    query = "SELECT * FROM users WHERE (" + " OR ".join( "interests LIKE '%" + item + "%'" for item in interests) + ") AND age >= " + str(age[0]) + " AND age <= " + str(age[1]) + " AND location IN ( " + "".join("'" + item + "'" for item in location) + ");"
     print(query)
     responce = databaseObj.executeQuery(query,interests + age + location)
     databaseObj.exit()
