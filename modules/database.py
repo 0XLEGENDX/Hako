@@ -43,6 +43,10 @@ class database:
         self.cur.execute(f"PRAGMA table_info({tableName})")
         return self.cur.fetchall()
     
+    def executeQuery(self,query:str,params:list)->list:
+        self.cur.execute(query)
+        return self.cur.fetchall()
+    
     def exit(self):
         self.sql.close()
 
